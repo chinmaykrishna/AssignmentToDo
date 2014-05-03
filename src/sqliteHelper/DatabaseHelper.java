@@ -1,13 +1,18 @@
 package sqliteHelper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import sqliteModel.Assignment;
 import sqliteModel.Course;
 import sqliteModel.Subtask;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 	
@@ -104,4 +109,54 @@ public long insertSubtask(Subtask subtask)
 	long task_id= db.insert(TABLE_SUBTASK,null,values);
 	return task_id;
 }
+//get assignment of a course
+public List<Assignment> getAllAssignmentOfCourse(int course_id)
+{
+	List<Assignment> assignments= new ArrayList<Assignment>();
+	String selectQuery= "SELECT * FROM TABLE_ASSIGNMENT WHERE KEY_ASSIGNMENT_COURSE="+ course_id;
+	Log.e(LOG,selectQuery);
+	SQLiteDatabase db= this.getReadableDatabase();
+	Cursor c=db.rawQuery(selectQuery, null);
+	//adding a's to assignments
+	if(c.moveToFirst())
+	{
+		do
+		{
+			Assignment a= new Assignment();
+			a.setAssignmentNo(c.getInt(c.getColumnIndex(KEY_ASSIGNMENT_ID)));
+			a.setAssignmentDesc(c.getString(c.getColumnIndex(KEY_ASSIGNMENT_DESC)));
+			a.seAssignmentStatus(c.getInt(c.getColumnIndex(KEY_ASSIGNMENT_STATUS)));
+			//if Assignment course to be shown
+			assignments.add(a);
+		}
+		while (c.moveToNext());
+	}
+	return assignments;
+}
+//get subtasks of an assignment
+public List<Subtask> getAllSubtaskOfAssignment(int task_id)
+{
+	List<Subtask> subtasks= new ArrayList<Subtask>();
+	String selectQuery= "SELECT * FROM TABLE_SUBTASK WHERE KEY_TASK_ASSIGNMENT="+ task_id;
+	Log.e(LOG,selectQuery);
+	SQLiteDatabase db= this.getReadableDatabase();
+	Cursor c=db.rawQuery(selectQuery, null);
+	//adding t's to tasks
+	if(c.moveToFirst())
+	{
+		do
+		{
+			Subtask t= new Subtask();
+			t.setTaskId(c.getInt(c.getColumnIndex(KEY_TASK_ID)));
+			t.setTaskDesc(c.getString(c.getColumnIndex(KEY_TASK_DESC)));
+			t.setTaskDuedate(c.getString(c.getColumnIndex(KEY_TASK_DUEDATE)));
+			t.setTaskStatus(c.getInt(c.getColumnIndex(KEY_TASK_STATUS)));
+			//if task's Assignment to be shown
+			subtasks.add(t);
+		}
+		while (c.moveToNext());
+	}
+	return subtasks;
+}
+
 }
