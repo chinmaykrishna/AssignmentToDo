@@ -158,5 +158,28 @@ public List<Subtask> getAllSubtaskOfAssignment(int task_id)
 	}
 	return subtasks;
 }
+//list of all courses
+public List<Course> getAllCourses()
+{
+	List<Course> courses=new ArrayList<Course>();
+	String selectQuery= "SELECT * FROM TABLE_COURSES";
+	Log.e("LOG", selectQuery);
+	SQLiteDatabase db= this.getReadableDatabase();
+	Cursor c= db.rawQuery(selectQuery, null);
+	if(c.moveToFirst())
+	{
+		do
+		{
+			Course course=new Course();
+			course.setCourseId(c.getInt(c.getColumnIndex(KEY_COURSE_ID)));
+			course.setCourseName(c.getString(c.getColumnIndex(KEY_COURSE_NAME)));
+			courses.add(course);
+			
+		}
+		while(c.moveToNext());
+		
+	}
+	return courses;
+}
 
 }
