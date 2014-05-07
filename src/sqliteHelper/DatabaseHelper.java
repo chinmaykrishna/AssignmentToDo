@@ -16,9 +16,8 @@ import android.util.Log;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 	
-	public DatabaseHelper(Context context, String name, CursorFactory factory,
-			int version) {
-		super(context, name, factory, version);
+	public DatabaseHelper(Context context) {
+		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -162,7 +161,7 @@ public List<Subtask> getAllSubtaskOfAssignment(int task_id)
 public List<Course> getAllCourses()
 {
 	List<Course> courses=new ArrayList<Course>();
-	String selectQuery= "SELECT * FROM TABLE_COURSES";
+	String selectQuery= "SELECT * FROM "+TABLE_COURSES;
 	Log.e("LOG", selectQuery);
 	SQLiteDatabase db= this.getReadableDatabase();
 	Cursor c= db.rawQuery(selectQuery, null);

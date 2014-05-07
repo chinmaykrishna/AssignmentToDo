@@ -10,9 +10,9 @@ public Course()
 
 }
 
-public Course(int id)
+public Course(String name)
 {
-	this.course_id=id;
+	this.course_name=name;
 }
 
 public Course (int id, String name)

@@ -8,20 +8,38 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/course_add_button"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_marginTop="20dp"
+        android:onClick="addCourse"
+        android:text="Add Course" />
 
     <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
+        android:id="@+id/course_remove_button"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView1"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="14dp"
-        android:text="Button" />
+        android:layout_below="@+id/course_add_button"
+        android:layout_marginTop="20dp"
+        android:onClick="removeCourse"
+        android:text="Remove Course" />
+
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/refresh_course_button"
+        android:layout_marginTop="20dp" >
+    </ListView>
+
+    <Button
+        android:id="@+id/refresh_course_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/course_remove_button"
+        android:onClick="refreshCourseList"
+        android:layout_marginTop="20dp"
+        android:text="Refresh course list" />
 
 </RelativeLayout>
