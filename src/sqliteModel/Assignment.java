@@ -35,7 +35,7 @@ public void setAssignmentDesc(String desc)
 {
 	this.assignment_Desc=desc;
 }
-public void seAssignmentStatus(int status)
+public void setAssignmentStatus(int status)
 {
 	this.status=status;
 }

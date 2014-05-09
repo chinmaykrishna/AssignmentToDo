@@ -7,6 +7,7 @@ import sqliteHelper.DatabaseHelper;
 import sqliteModel.Course;
 import android.app.Dialog;
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -14,11 +15,13 @@ import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 public class MainActivity extends ListActivity {
 
 	DatabaseHelper db;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +38,6 @@ public class MainActivity extends ListActivity {
 			list.add(course.getCourseName());
 		}
 
-		
 		ArrayAdapter<String> adapter= new ArrayAdapter<String>(this, R.layout.course_row,R.id.course_name_row, list);
 		setListAdapter(adapter);
 
@@ -106,6 +108,25 @@ public class MainActivity extends ListActivity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+	
+	
+	@Override
+	  protected void onListItemClick(ListView l, View v, int position, long id) {
+		//list of courses
+		List<Course> courses=new ArrayList<Course>();
+		courses= db.getAllCourses();
+		//list of course names
+		ArrayList<Integer> list_id= new ArrayList<Integer>() ;
+		for(Course course:courses)
+		{
+			list_id.add(course.getCourseId());
+		}
+		int course_id=list_id.get(position);
+	    Toast.makeText(this, course_id + " id selected", Toast.LENGTH_LONG).show();
+	    Intent i = new Intent(MainActivity.this, AssignmentList.class);
+	    i.putExtra("course_id",course_id );
+	    startActivity(i);
+	  }
 
 }
 

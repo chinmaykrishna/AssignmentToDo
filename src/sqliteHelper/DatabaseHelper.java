@@ -112,7 +112,7 @@ public long insertSubtask(Subtask subtask)
 public List<Assignment> getAllAssignmentOfCourse(int course_id)
 {
 	List<Assignment> assignments= new ArrayList<Assignment>();
-	String selectQuery= "SELECT * FROM TABLE_ASSIGNMENT WHERE KEY_ASSIGNMENT_COURSE="+ course_id;
+	String selectQuery= "SELECT * FROM "+ TABLE_ASSIGNMENT+" WHERE "+KEY_ASSIGNMENT_COURSE+"="+ course_id;
 	Log.e(LOG,selectQuery);
 	SQLiteDatabase db= this.getReadableDatabase();
 	Cursor c=db.rawQuery(selectQuery, null);
@@ -124,7 +124,7 @@ public List<Assignment> getAllAssignmentOfCourse(int course_id)
 			Assignment a= new Assignment();
 			a.setAssignmentNo(c.getInt(c.getColumnIndex(KEY_ASSIGNMENT_ID)));
 			a.setAssignmentDesc(c.getString(c.getColumnIndex(KEY_ASSIGNMENT_DESC)));
-			a.seAssignmentStatus(c.getInt(c.getColumnIndex(KEY_ASSIGNMENT_STATUS)));
+			a.setAssignmentStatus(c.getInt(c.getColumnIndex(KEY_ASSIGNMENT_STATUS)));
 			//if Assignment course to be shown
 			assignments.add(a);
 		}
@@ -136,7 +136,7 @@ public List<Assignment> getAllAssignmentOfCourse(int course_id)
 public List<Subtask> getAllSubtaskOfAssignment(int task_id)
 {
 	List<Subtask> subtasks= new ArrayList<Subtask>();
-	String selectQuery= "SELECT * FROM TABLE_SUBTASK WHERE KEY_TASK_ASSIGNMENT="+ task_id;
+	String selectQuery= "SELECT * FROM "+TABLE_SUBTASK+" WHERE "+KEY_TASK_ASSIGNMENT+"="+ task_id;
 	Log.e(LOG,selectQuery);
 	SQLiteDatabase db= this.getReadableDatabase();
 	Cursor c=db.rawQuery(selectQuery, null);
@@ -180,5 +180,12 @@ public List<Course> getAllCourses()
 	}
 	return courses;
 }
+
+/*public int getCourseId(String course_name)
+{
+	SQLiteDatabase db=this.getReadableDatabase();
+	String selectQuery= "SELECT "+KEY_COURSE_ID+" FROM TABLE_COURSES WHERE KEY_COURSE_NAME="+course_name;
+	
+}*/
 
 }
