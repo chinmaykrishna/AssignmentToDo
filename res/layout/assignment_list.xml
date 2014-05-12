@@ -8,38 +8,44 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".AssignmentList" >
 
-    <Button
-        android:id="@+id/assignment_add_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:onClick="addAssignment"
-        android:text="Add Assignment" />
-
-    <Button
-        android:id="@+id/assignment_remove_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/assignment_add_button"
-        android:layout_marginTop="20dp"
-        android:onClick="removeAssignment"
-        android:text="Remove Assignment" />
-
     <ListView
         android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/refresh_assignment_button"
-        android:layout_marginTop="20dp" >
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="60dp" >
     </ListView>
-
-    <Button
-        android:id="@+id/refresh_assignment_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/assignment_remove_button"
-        android:onClick="refreshAssignmentList"
+    
+    <ImageButton
+        android:id="@+id/assignment_add_button"
+        android:layout_width="53dp"
+        android:layout_height="53dp"
         android:layout_marginTop="20dp"
+        android:layout_alignLeft="@android:id/list"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/add_button"
+        android:layout_alignParentLeft="true"
+        android:onClick="addAssignment"
+        android:text="Add Assignment" />
+
+    <ImageButton
+        android:id="@+id/assignment_remove_button"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/remove_button"
+        android:onClick="removeAssignment"
+        android:text="Remove Assignment" />
+
+    <ImageButton
+        android:id="@+id/refresh_assignment_button"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/refresh_button"
+        android:onClick="refreshAssignmentList"
         android:text="Refresh assignment list" />
 
 </RelativeLayout>

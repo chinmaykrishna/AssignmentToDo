@@ -8,38 +8,46 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
 
-    <Button
-        android:id="@+id/course_add_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:onClick="addCourse"
-        android:text="Add Course" />
-
-    <Button
-        android:id="@+id/course_remove_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/course_add_button"
-        android:layout_marginTop="20dp"
-        android:onClick="removeCourse"
-        android:text="Remove Course" />
-
     <ListView
         android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/refresh_course_button"
-        android:layout_marginTop="20dp" >
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="60dp">
     </ListView>
+    
+    <ImageButton
+        android:id="@+id/course_remove_button"
+        android:contentDescription="Removes course"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/remove_button"
+        android:onClick="removeCourse"
+        android:text="Remove Course" />
 
-    <Button
-        android:id="@+id/refresh_course_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/course_remove_button"
-        android:onClick="refreshCourseList"
-        android:layout_marginTop="20dp"
-        android:text="Refresh course list" />
+     <ImageButton
+         android:id="@+id/course_add_button"
+         android:contentDescription="Adds course"
+         android:layout_width="53dp"
+         android:layout_height="53dp"
+         android:layout_alignLeft="@android:id/list"
+         android:layout_alignParentBottom="true"
+         android:background="@drawable/add_button"
+         android:layout_alignParentLeft="true"
+         android:onClick="addCourse"
+         android:text="Add Course" />
+
+     <ImageButton
+         android:id="@+id/refresh_course_button"
+         android:contentDescription="Refreshes course list"
+         android:layout_width="50dp"
+         android:layout_height="50dp"
+         android:layout_alignParentBottom="true"
+         android:layout_alignParentRight="true"
+         android:background="@drawable/refresh_button"
+         android:onClick="refreshCourseList"
+         android:text="Refresh course list" />
 
 </RelativeLayout>

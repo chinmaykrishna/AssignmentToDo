@@ -21,22 +21,25 @@ public final class R {
         public static final int activity_vertical_margin=0x7f040001;
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
+        public static final int add_button=0x7f020000;
+        public static final int ic_launcher=0x7f020001;
+        public static final int refresh_button=0x7f020002;
+        public static final int remove_button=0x7f020003;
     }
     public static final class id {
         public static final int action_settings=0x7f080016;
-        public static final int assignment_add=0x7f080005;
+        public static final int assignment_add=0x7f080006;
         public static final int assignment_add_button=0x7f08000a;
         public static final int assignment_name_row=0x7f08000d;
         public static final int assignment_remove_button=0x7f08000b;
         public static final int assignment_text=0x7f080004;
-        public static final int cancel_assignment_add=0x7f080006;
+        public static final int cancel_assignment_add=0x7f080005;
         public static final int cancel_course_add=0x7f080009;
         public static final int checkBox1=0x7f080013;
         public static final int course_add=0x7f080008;
-        public static final int course_add_button=0x7f080000;
+        public static final int course_add_button=0x7f080001;
         public static final int course_name_row=0x7f08000e;
-        public static final int course_remove_button=0x7f080001;
+        public static final int course_remove_button=0x7f080000;
         public static final int course_text=0x7f080007;
         public static final int duedate=0x7f080015;
         public static final int refresh_assignment_button=0x7f08000c;

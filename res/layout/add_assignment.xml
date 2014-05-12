@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="Add assignment"
+        android:text="Add Assignment"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView1"
         android:layout_centerHorizontal="true"
-        android:hint="Enter assignment Description"
+        android:hint="Enter Description"
         android:ems="10" >
 
         <requestFocus />
@@ -28,20 +28,24 @@
     <Button
         android:id="@+id/assignment_add"
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
+        android:layout_width="70dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/assignment_text"
+        android:layout_alignBaseline="@+id/cancel_assignment_add"
+        android:layout_alignBottom="@+id/cancel_assignment_add"
+        android:layout_alignLeft="@+id/assignment_text"
+        android:layout_marginLeft="18dp"
         android:text="Add" />
-
+    
     <Button
         android:id="@+id/cancel_assignment_add"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/assignment_text"
         android:layout_below="@+id/assignment_text"
-        android:layout_alignParentRight="true"
+        android:layout_marginRight="18dp"
         android:text="Cancel" />
 
+    
     
 </RelativeLayout>
