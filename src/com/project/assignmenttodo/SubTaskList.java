@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import sqliteHelper.DatabaseHelper;
+import sqliteModel.Course;
 import sqliteModel.Subtask;
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -16,11 +17,15 @@ import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SubTaskList extends FragmentActivity{
 	int assignment_id;
@@ -127,6 +132,47 @@ public class SubTaskList extends FragmentActivity{
 	public void showDatePickerDialog(View v) {
 	    DialogFragment newFragment = new DatePickerFragment();
 	    newFragment.show(getFragmentManager(), "datePicker");
+	}
+
+	public void addSubtask(View v)
+	{
+		final Dialog dialog=new Dialog(this);
+		dialog.setContentView(R.layout.add_subtask);
+		dialog.setTitle("Subtask addition");
+		Button subtask_add=(Button) dialog.findViewById(R.id.add_subtask);
+		Button cancel_subtask_add=(Button) dialog.findViewById(R.id.cancel_subtask);
+
+		cancel_subtask_add.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				dialog.cancel();
+
+			}
+		});
+
+		subtask_add.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				EditText subtask_text= (EditText)dialog.findViewById(R.id.subtask_text);
+				Subtask new_subtask= new Subtask();
+				String subtask_name= subtask_text.getText().toString();
+				if(subtask_name!=null)
+				{
+					new_subtask.setTaskDesc(subtask_name);
+					db.insertCourse(new_course);
+					
+				}
+				else
+				{
+					Toast toast=Toast.makeText(SubTaskList.this, "Enter a valid course name", Toast.LENGTH_LONG);
+					toast.show();
+				}
+				dialog.dismiss();
+			}
+		});
+		dialog.show();
 	}
 
 }
