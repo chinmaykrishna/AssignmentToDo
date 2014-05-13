@@ -6,7 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".SubTask_List" >
+    tools:context=".SubTaskList" >
 
     <ListView
         android:id="@+id/task_list"
@@ -24,7 +24,7 @@
         android:layout_alignParentBottom="true"
         android:background="@drawable/add_button"
         android:layout_alignParentLeft="true"
-        android:onClick="addsubtask"
+        android:onClick="addSubtask"
         android:text="Add subtask" />
 
     <ImageButton

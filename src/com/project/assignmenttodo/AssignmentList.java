@@ -32,6 +32,7 @@ public class AssignmentList extends ListActivity{
 		//list of Assignments
 		List<Assignment> assignments=new ArrayList<Assignment>();
 		assignments= db.getAllAssignmentOfCourse(course_id);
+		
 		//list of Assignment names
 		final ArrayList<String> list= new ArrayList<String>();
 		for(Assignment assignment:assignments)
@@ -75,6 +76,7 @@ public class AssignmentList extends ListActivity{
 					new_assignment.setAssignmentCourse(course_id);
 					new_assignment.setAssignmentStatus(0);
 					db.insertAssignment(new_assignment);
+					
 					//ArrayAdapter<String> adapter=new ArrayAdapter<String>(MainActivity.this, R.layout.assignment_row,R.id.assignment_name_row, list);
 					//adapter.notifyDataSetChanged();
 				}
@@ -123,4 +125,5 @@ public class AssignmentList extends ListActivity{
 	    startActivity(i);
 	  }
 
+	
 }

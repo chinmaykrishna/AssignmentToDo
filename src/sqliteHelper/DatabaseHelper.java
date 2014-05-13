@@ -48,15 +48,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	private static final String CREATE_TABLE_ASSIGNMENT= "CREATE TABLE " + TABLE_ASSIGNMENT +
 			"("+ KEY_ASSIGNMENT_ID+" INTEGER PRIMARY KEY,"+ KEY_ASSIGNMENT_DESC +" TEXT,"+
 			KEY_ASSIGNMENT_STATUS+" INTEGER,"+ KEY_ASSIGNMENT_COURSE+" INTEGER, FOREIGN KEY("+KEY_ASSIGNMENT_COURSE+")"
-			+" REFERENCES TABLE_COURSE(KEY_COURSE_ID)"+")";
+			+" REFERENCES TABLE_COURSE("+KEY_COURSE_ID+")"+")";
 	//course table creation query
 	private static final String CREATE_TABLE_COURSE= "CREATE TABLE " +TABLE_COURSES+
 			"(" + KEY_COURSE_ID +" INTEGER PRIMARY KEY,"+ KEY_COURSE_NAME+" TEXT"+")";
 	//subtask table creation query
 	private static final String CREATE_TABLE_SUBTASK= "CREATE TABLE " + TABLE_SUBTASK+
-			"("+KEY_TASK_ID+"INTEGER PRIMARY KEY,"+KEY_TASK_DESC +" TEXT,"+KEY_TASK_DUEDATE+" DATETIME,"
+			"("+KEY_TASK_ID+" INTEGER PRIMARY KEY,"+KEY_TASK_DESC +" TEXT,"+KEY_TASK_DUEDATE+" DATETIME,"
 			+KEY_TASK_STATUS+" INTEGER,"+KEY_TASK_ASSIGNMENT+" INTEGER, FOREIGN KEY("+KEY_TASK_ASSIGNMENT+")"
-			+" REFERENCES TABLE_ASSIGNMENT(KEY_ASSIGNMENT_ID)"+")";
+			+" REFERENCES TABLE_ASSIGNMENT("+KEY_ASSIGNMENT_ID+")"+")";
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
@@ -85,6 +85,7 @@ public long insertCourse(Course course)
 	long course_id=db.insert(TABLE_COURSES, null, values);
 	return course_id;
 }
+
 //add assignment
 public long insertAssignment(Assignment assignment)
 {
@@ -133,10 +134,10 @@ public List<Assignment> getAllAssignmentOfCourse(int course_id)
 	return assignments;
 }
 //get subtasks of an assignment
-public List<Subtask> getAllSubtaskOfAssignment(int task_id)
+public List<Subtask> getAllSubtaskOfAssignment(int assignment_id)
 {
 	List<Subtask> subtasks= new ArrayList<Subtask>();
-	String selectQuery= "SELECT * FROM "+TABLE_SUBTASK+" WHERE "+KEY_TASK_ASSIGNMENT+"="+ task_id;
+	String selectQuery= "SELECT * FROM "+TABLE_SUBTASK+" WHERE "+KEY_TASK_ASSIGNMENT+"="+ assignment_id;
 	Log.e(LOG,selectQuery);
 	SQLiteDatabase db= this.getReadableDatabase();
 	Cursor c=db.rawQuery(selectQuery, null);
