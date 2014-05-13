@@ -6,6 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/texture"
     tools:context=".MainActivity" >
 
     <ListView
@@ -13,7 +14,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="60dp">
+        android:divider="@android:color/transparent"
+        android:dividerHeight="10.0sp"
+        android:layout_marginBottom="60dp" >
     </ListView>
     
     <ImageButton

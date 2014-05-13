@@ -1,6 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" 
+    android:background="@drawable/gradient_bg" 
+    android:gravity="center_vertical" 
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp" >
 
     <CheckBox
         android:id="@+id/checkBox1"
@@ -11,22 +17,34 @@
 
     <TextView
         android:id="@+id/subtask_desc"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
-        android:layout_toRightOf="@+id/checkBox1"
-        android:text="Large Text"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textColor="#040404"
+        android:typeface="sans"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:layout_toRightOf="@+id/checkBox1" />
 
     <TextView
         android:id="@+id/duedate"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:textColor="#040404"
+        android:typeface="sans"
+        android:textSize="10sp"
+        android:textStyle="bold"
         android:layout_below="@+id/checkBox1"
         android:layout_toRightOf="@+id/checkBox1"
-        android:layout_marginLeft="10dp"
-        android:text="Medium Text"
-        android:onClick="showDatePickerDialog"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:onClick="showDatePickerDialog" />
+	
+	<ImageView 
+	    android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ic_action_remove"
+        android:layout_alignParentRight="true" />
 
 </RelativeLayout>
