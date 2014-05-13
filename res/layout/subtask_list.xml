@@ -25,7 +25,8 @@
         android:background="@drawable/add_button"
         android:layout_alignParentLeft="true"
         android:onClick="addSubtask"
-        android:text="Add subtask" />
+        android:text="Add subtask"
+        />
 
     <ImageButton
         android:id="@+id/subtask_remove_button"

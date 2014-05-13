@@ -181,6 +181,7 @@ public class SubTaskList extends FragmentActivity{
 					new_subtask.setTaskDesc(subtask_name);
 					new_subtask.setTaskStatus(0);
 					new_subtask.setTaskDuedate(subtask_date);
+					new_subtask.setTaskAssignment(assignment_id);
 					long taskid=db.insertSubtask(new_subtask);
 					Toast toast= Toast.makeText(SubTaskList.this, "id is "+taskid, Toast.LENGTH_LONG);
 					toast.show();
