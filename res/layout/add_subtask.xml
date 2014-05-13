@@ -15,22 +15,12 @@
     </EditText>
 
     <Button
-        android:id="@+id/add_duedate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/editText1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:onClick="showDatePickerDialog"
-        android:text="Add DueDate" />
-
-    <Button
         android:id="@+id/add_subtask"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/add_duedate"
+        android:layout_below="@+id/date"
         android:layout_marginTop="20dp"
         android:text="Add" />
 
@@ -43,5 +33,15 @@
         android:layout_alignBottom="@+id/add_subtask"
         android:layout_alignParentRight="true"
         android:text="Cancel" />
+
+    <EditText
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/subtask_text"
+        android:ems="10"
+        android:hint="Enter Due Date"
+        android:inputType="date" />
 
 </RelativeLayout>

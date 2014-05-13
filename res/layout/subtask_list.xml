@@ -6,40 +6,45 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".SubTask_List" >
-
-    <Button
-        android:id="@+id/subtask_add_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:onClick="addsubtask"
-        android:text="Add subtask" />
-
-    <Button
-        android:id="@+id/subtask_remove_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/subtask_add_button"
-        android:layout_marginTop="20dp"
-        android:onClick="removesubtask"
-        android:text="Remove subtask" />
+    tools:context=".SubTaskList" >
 
     <ListView
         android:id="@+id/task_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/refresh_subtask_button"
-        android:layout_marginTop="20dp" >
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="60dp">
     </ListView>
+    
+    <ImageButton
+        android:id="@+id/subtask_add_button"
+        android:layout_width="53dp"
+        android:layout_height="53dp"
+        android:layout_alignLeft="@+id/task_list"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/add_button"
+        android:layout_alignParentLeft="true"
+        android:onClick="addSubtask"
+        android:text="Add subtask" />
 
-    <Button
+    <ImageButton
+        android:id="@+id/subtask_remove_button"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/remove_button"
+        android:onClick="removesubtask"
+        android:text="Remove subtask" />
+
+    <ImageButton
         android:id="@+id/refresh_subtask_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/subtask_remove_button"
+       	android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/refresh_button"
         android:onClick="refreshsubtaskList"
-        android:layout_marginTop="20dp"
         android:text="Refresh subtask list" />
 
 </RelativeLayout>

@@ -25,21 +25,24 @@
     </EditText>
 
     <Button
-        android:id="@+id/course_add"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/course_text"
-        android:text="Add" />
-
-    <Button
         android:id="@+id/cancel_course_add"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/course_text"
         android:layout_below="@+id/course_text"
-        android:layout_alignParentRight="true"
+        android:layout_marginRight="18dp"
         android:text="Cancel" />
+
+    <Button
+        android:id="@+id/course_add"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/cancel_course_add"
+        android:layout_alignBottom="@+id/cancel_course_add"
+        android:layout_alignLeft="@+id/course_text"
+        android:layout_marginLeft="18dp"
+        android:text="Add" />
 
 </RelativeLayout>
