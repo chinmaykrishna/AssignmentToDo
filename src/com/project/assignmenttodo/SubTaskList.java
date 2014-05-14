@@ -5,7 +5,6 @@ import java.util.Calendar;
 import java.util.List;
 
 import sqliteHelper.DatabaseHelper;
-import sqliteModel.Course;
 import sqliteModel.Subtask;
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -17,13 +16,14 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -128,6 +128,8 @@ public class SubTaskList extends FragmentActivity{
 				row=convertView;
 			TextView subtask_desc, duedate;
 			CheckBox cb;
+			ImageView dlt;
+			dlt=(ImageView)row.findViewById(R.id.delete_task);
 			cb=(CheckBox) row.findViewById(R.id.checkBox1);
 			subtask_desc= (TextView) row.findViewById(R.id.subtask_desc);
 			duedate = (TextView) row.findViewById(R.id.duedate);
@@ -159,7 +161,19 @@ public class SubTaskList extends FragmentActivity{
 					
 				}
 			});
+			dlt.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+				ImageView delete =(ImageView) v;	
+				Subtask sub=(Subtask) delete.getTag();
+				sub.setTaskAssignment(assignment_id);
+				int subid=sub.getTaskId();
+				db.deleteSubtask(subid);
+				}
+			});
 			cb.setTag(subtask);
+			dlt.setTag(subtask);
 			
 			/*Boolean checkStatus;
 			if(subtask.getTaskStatus()==1)

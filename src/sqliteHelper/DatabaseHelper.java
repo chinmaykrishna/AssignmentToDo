@@ -48,7 +48,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	private static final String CREATE_TABLE_ASSIGNMENT= "CREATE TABLE " + TABLE_ASSIGNMENT +
 			"("+ KEY_ASSIGNMENT_ID+" INTEGER PRIMARY KEY,"+ KEY_ASSIGNMENT_DESC +" TEXT,"+
 			KEY_ASSIGNMENT_STATUS+" INTEGER,"+ KEY_ASSIGNMENT_COURSE+" INTEGER, FOREIGN KEY("+KEY_ASSIGNMENT_COURSE+")"
-			+" REFERENCES TABLE_COURSE("+KEY_COURSE_ID+")"+")";
+			+" REFERENCES TABLE_COURSE("+KEY_COURSE_ID+")"+" ON DELETE CASCADE)";
 	//course table creation query
 	private static final String CREATE_TABLE_COURSE= "CREATE TABLE " +TABLE_COURSES+
 			"(" + KEY_COURSE_ID +" INTEGER PRIMARY KEY,"+ KEY_COURSE_NAME+" TEXT"+")";
@@ -56,7 +56,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	private static final String CREATE_TABLE_SUBTASK= "CREATE TABLE " + TABLE_SUBTASK+
 			"("+KEY_TASK_ID+" INTEGER PRIMARY KEY,"+KEY_TASK_DESC +" TEXT,"+KEY_TASK_DUEDATE+" DATETIME,"
 			+KEY_TASK_STATUS+" INTEGER,"+KEY_TASK_ASSIGNMENT+" INTEGER, FOREIGN KEY("+KEY_TASK_ASSIGNMENT+")"
-			+" REFERENCES TABLE_ASSIGNMENT("+KEY_ASSIGNMENT_ID+")"+")";
+			+" REFERENCES TABLE_ASSIGNMENT("+KEY_ASSIGNMENT_ID+")"+" ON DELETE CASCADE)";
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
@@ -194,7 +194,21 @@ public int subtaskUpdate(Subtask subtask)
 	
 	return db.update(TABLE_SUBTASK, values, KEY_TASK_ID+" = ?", new String[] { String.valueOf(subtask.getTaskId()) });
 }
-
+public void deleteSubtask(long subtaskid)
+{
+	SQLiteDatabase db= this.getWritableDatabase();
+	db.delete(TABLE_SUBTASK, KEY_TASK_ID+" = ?", new String[]{String.valueOf(subtaskid)});
+}
+public void deleteAssignment(long assignmentid)
+{
+	SQLiteDatabase db= this.getWritableDatabase();
+	db.delete(TABLE_ASSIGNMENT, KEY_ASSIGNMENT_ID+" = ?", new String[]{String.valueOf(assignmentid)});
+}
+public void deleteCourse(long courseid)
+{
+	SQLiteDatabase db= this.getWritableDatabase();
+	db.delete(TABLE_COURSES, KEY_COURSE_ID+" = ?", new String[]{String.valueOf(courseid)});
+}
 /*public int getCourseId(String course_name)
 {
 	SQLiteDatabase db=this.getReadableDatabase();
