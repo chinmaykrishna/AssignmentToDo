@@ -146,7 +146,7 @@ public class SubTaskList extends FragmentActivity{
 				public void onClick(View v) {
 					CheckBox check=(CheckBox)v;
 					Subtask subtask= (Subtask) check.getTag();
-					
+					subtask.setTaskAssignment(assignment_id);					
 					if(subtask.getTaskStatus()==1)
 					{
 						subtask.setTaskStatus(0);
@@ -154,8 +154,8 @@ public class SubTaskList extends FragmentActivity{
 					else
 						subtask.setTaskStatus(1);
 					db.subtaskUpdate(subtask);
-					//Toast toast=Toast.makeText(SubTaskList.this, rows+" rows updated ", Toast.LENGTH_LONG);
-					//toast.show();
+					Toast toast=Toast.makeText(SubTaskList.this, "ass "+subtask.getTaskAssignment(), Toast.LENGTH_LONG);
+					toast.show();
 					
 				}
 			});
