@@ -182,6 +182,19 @@ public List<Course> getAllCourses()
 	return courses;
 }
 
+public int subtaskUpdate(Subtask subtask)
+{
+	SQLiteDatabase db=this.getWritableDatabase();
+	
+	ContentValues values= new ContentValues();
+	values.put(KEY_TASK_DESC, subtask.getTaskDesc());
+	values.put(KEY_TASK_ASSIGNMENT, subtask.getTaskAssignment());
+	values.put(KEY_TASK_DUEDATE, subtask.getTaskDuedate());
+	values.put(KEY_TASK_STATUS, subtask.getTaskStatus());
+	
+	return db.update(TABLE_SUBTASK, values, KEY_TASK_ID+" = ?", new String[] { String.valueOf(subtask.getTaskId()) });
+}
+
 /*public int getCourseId(String course_name)
 {
 	SQLiteDatabase db=this.getReadableDatabase();
