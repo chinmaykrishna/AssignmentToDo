@@ -59,7 +59,38 @@ public class SubTaskList extends FragmentActivity{
 		}
 		
 		l1=(ListView)findViewById(R.id.task_list);
-		l1.setAdapter(new subtaskListAdapter(SubTaskList.this,list_name, list_date, list_status));
+		l1.setAdapter(new subtaskListAdapter(SubTaskList.this,subtasks,list_name, list_date, list_status));
+	}
+	private static class SubtaskViewHolder{
+		private CheckBox cb;
+		private TextView date;
+		
+		public SubtaskViewHolder()
+		{
+			
+		}
+		public SubtaskViewHolder(CheckBox checkbox, TextView dateview)
+		{
+			this.cb=checkbox;
+			this.date=dateview;
+		}
+		
+		public void setCheckBox(CheckBox c)
+		{
+			this.cb=c;
+		}
+		public void setDateView(TextView date)
+		{
+			this.date=date;
+		}
+		public CheckBox getCheckBox()
+		{
+			return this.cb;
+		}
+		public TextView getDateView()
+		{
+			return this.date;
+		}
 	}
 	class subtaskListAdapter extends BaseAdapter{
 
@@ -68,20 +99,23 @@ public class SubTaskList extends FragmentActivity{
 		ArrayList<String> list_name=new ArrayList<String>();
 		ArrayList<String> list_date=new ArrayList<String>();
 		ArrayList<Integer> list_status=new ArrayList<Integer>();
+		List<Subtask> subtasks=new ArrayList<Subtask>();
 		subtaskListAdapter() {
 			list_name=null;
 			list_date=null;
 			list_status=null;
+			subtasks=null;
 		}
-		subtaskListAdapter(Activity context,ArrayList<String> name, ArrayList<String> date, ArrayList<Integer> status)
+		subtaskListAdapter(Activity context,List<Subtask> subtasks2,ArrayList<String> name, ArrayList<String> date, ArrayList<Integer> status)
 		{
 			this.context=context;
+			subtasks=subtasks2;
 			list_name=name;
 			list_date=date;
 			list_status=status;
 		}
 		public View getView(int position, View convertView, ViewGroup parent) {
-
+			Subtask subtask=(Subtask) this.getItem(position);
 			View row;
 			if(convertView==null)
 			{
@@ -97,6 +131,7 @@ public class SubTaskList extends FragmentActivity{
 			cb=(CheckBox) row.findViewById(R.id.checkBox1);
 			subtask_desc= (TextView) row.findViewById(R.id.subtask_desc);
 			duedate = (TextView) row.findViewById(R.id.duedate);
+			row.setTag(new SubtaskViewHolder(cb, duedate));
 			if(list_status.get(position)==1)
 			{
 				cb.setChecked(true);
@@ -105,6 +140,34 @@ public class SubTaskList extends FragmentActivity{
 				cb.setChecked(false);
 			subtask_desc.setText(list_name.get(position));
 			duedate.setText(list_date.get(position));
+			cb.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					CheckBox check=(CheckBox)v;
+					Subtask subtask= (Subtask) check.getTag();
+					//Toast toast=Toast.makeText(SubTaskList.this, "subtaskdesc is "+subtask.getTaskDesc(), Toast.LENGTH_LONG);
+					//toast.show();
+					if(subtask.getTaskStatus()==1)
+					{
+						subtask.setTaskStatus(0);
+					}
+					else
+						subtask.setTaskStatus(1);
+					
+				}
+			});
+			cb.setTag(subtask);
+			
+			/*Boolean checkStatus;
+			if(subtask.getTaskStatus()==1)
+			{
+				checkStatus=true;
+			}
+			else
+				checkStatus=false;
+			cb.setChecked(checkStatus);
+			duedate.setText(subtask.getTaskDuedate());*/
 			Log.e("POS", list_name.get(position));
 
 			return (row);
@@ -117,7 +180,7 @@ public class SubTaskList extends FragmentActivity{
 		@Override
 		public Object getItem(int position) {
 			// TODO Auto-generated method stub
-			return position;
+			return subtasks.get(position);
 		}
 		@Override
 		public long getItemId(int position) {
@@ -211,7 +274,7 @@ public class SubTaskList extends FragmentActivity{
 			list_status.add(subtask.getTaskStatus());
 		}
 		l1=(ListView)findViewById(R.id.task_list);
-		l1.setAdapter(new subtaskListAdapter(SubTaskList.this,list_name, list_date, list_status));
+		l1.setAdapter(new subtaskListAdapter(SubTaskList.this,subtasks,list_name, list_date, list_status));
 
 	}
 

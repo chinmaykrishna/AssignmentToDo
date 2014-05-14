@@ -17,11 +17,11 @@
     <Button
         android:id="@+id/add_subtask"
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
+        android:layout_width="70dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_alignLeft="@+id/date"
         android:layout_below="@+id/date"
-        android:layout_marginTop="20dp"
+        android:layout_marginLeft="18dp"
         android:text="Add" />
 
     <Button
@@ -29,9 +29,9 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/add_subtask"
-        android:layout_alignBottom="@+id/add_subtask"
-        android:layout_alignParentRight="true"
+        android:layout_alignRight="@+id/date"
+        android:layout_below="@+id/date"
+        android:layout_marginRight="18dp"
         android:text="Cancel" />
 
     <EditText

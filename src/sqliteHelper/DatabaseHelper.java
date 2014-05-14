@@ -85,6 +85,7 @@ public long insertCourse(Course course)
 	long course_id=db.insert(TABLE_COURSES, null, values);
 	return course_id;
 }
+
 //add assignment
 public long insertAssignment(Assignment assignment)
 {
