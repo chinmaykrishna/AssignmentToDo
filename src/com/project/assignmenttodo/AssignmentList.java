@@ -5,23 +5,29 @@ import java.util.List;
 
 import sqliteHelper.DatabaseHelper;
 import sqliteModel.Assignment;
-import sqliteModel.Course;
+import android.app.Activity;
 import android.app.Dialog;
-import android.app.ListActivity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-public class AssignmentList extends ListActivity{
+public class AssignmentList extends Activity{
 	int course_id;
 	DatabaseHelper db;
+	ListView l1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +46,123 @@ public class AssignmentList extends ListActivity{
 		{
 			list.add(assignment.getAssignmentDesc());
 		}
+		l1=(ListView)findViewById(R.id.assign_list);
+		l1.setAdapter(new assignmentListAdapter(AssignmentList.this,assignments,list));
 
-
-		ArrayAdapter<String> adapter= new ArrayAdapter<String>(this, R.layout.assignment_row,R.id.assignment_name_row, list);
-		setListAdapter(adapter);
 
 	}
+	private static class AssignmentViewHolder{
+		private TextView desc;
+		
+		public AssignmentViewHolder()
+		{
+			
+		}
+		public AssignmentViewHolder( TextView descview)
+		{
+		
+			this.desc=descview;
+		}
+		
+		public void setDesc(TextView desc)
+		{
+			this.desc=desc;
+		}
+		public TextView getDesc()
+		{
+			return this.desc;
+		}
+	}
+	class assignmentListAdapter extends BaseAdapter{
+
+		private Activity context;
+		//show assignment list
+		ArrayList<String> list_name=new ArrayList<String>();
+		
+		List<Assignment> assignments=new ArrayList<Assignment>();
+		assignmentListAdapter() {
+			list_name=null;
+		    assignments=null;
+		}
+		assignmentListAdapter(Activity context,List<Assignment> assignments2,ArrayList<String> name)
+		{
+			this.context=context;
+			assignments=assignments2;
+			list_name=name;
+			
+		}
+		public View getView(int position, View convertView, ViewGroup parent) {
+			Assignment assignment=(Assignment) this.getItem(position);
+			View row;
+			if(convertView==null)
+			{
+			LayoutInflater inflater = (LayoutInflater)context.getSystemService
+					(Context.LAYOUT_INFLATER_SERVICE);
+			
+			row = inflater.inflate(R.layout.assignment_row, parent, false);
+			}
+			else
+				row=convertView;
+			TextView assignment_desc;
+			ImageView dlt;
+			dlt=(ImageView)row.findViewById(R.id.delete_assignment);
+			assignment_desc= (TextView) row.findViewById(R.id.assignment_name_row);
+			
+			row.setTag(new AssignmentViewHolder(assignment_desc));
+			
+			assignment_desc.setText(list_name.get(position));
+			
+			
+			dlt.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+				ImageView delete =(ImageView) v;	
+				Assignment assn=(Assignment) delete.getTag();
+				assn.setAssignmentCourse(course_id);
+				int assnid=assn.getAssignmentNo();
+				Toast t1=Toast.makeText(AssignmentList.this, assnid +" should be deleted", Toast.LENGTH_LONG);
+				t1.show();
+				db.deleteAssignment(assnid);
+				}
+			});
+			assignment_desc.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+				TextView name=(TextView) v;
+				Assignment assn=(Assignment) name.getTag();
+				
+				int assnid=assn.getAssignmentNo();
+			    Intent i = new Intent(AssignmentList.this, SubTaskList.class);
+			    i.putExtra("assignment_id",assnid );
+			    startActivity(i);	
+				}
+			});
+			assignment_desc.setTag(assignment);
+			dlt.setTag(assignment);
+			
+			Log.e("POS", list_name.get(position));
+
+			return (row);
+		}
+		@Override
+		public int getCount() {
+			// TODO Auto-generated method stub
+			return list_name.size();
+		}
+		@Override
+		public Object getItem(int position) {
+			// TODO Auto-generated method stub
+			return assignments.get(position);
+		}
+		@Override
+		public long getItemId(int position) {
+			// TODO Auto-generated method stub
+			return position;
+		}
+	}
+
 	//add assignment
 	public void addAssignment(View v)
 	{
@@ -104,17 +221,18 @@ public class AssignmentList extends ListActivity{
 		}
 
 
-		ArrayAdapter<String> adapter= new ArrayAdapter<String>(this, R.layout.assignment_row,R.id.assignment_name_row, list);
-		setListAdapter(adapter);
+		l1=(ListView)findViewById(R.id.assign_list);
+		l1.setAdapter(new assignmentListAdapter(AssignmentList.this,assignments,list));
 
 	}
 	
-	@Override
+	/*@Override
 	  protected void onListItemClick(ListView l, View v, int position, long id) {
 		List<Assignment> assignments=new ArrayList<Assignment>();
 		assignments= db.getAllAssignmentOfCourse(course_id);
 		//list of course names
-		ArrayList<Integer> list_id= new ArrayList<Integer>() ;
+		final ArrayList<Integer> list_id= new ArrayList<Integer>() ;
+		
 		for(Assignment assignment:assignments)
 		{
 			list_id.add(assignment.getAssignmentNo());
@@ -124,7 +242,7 @@ public class AssignmentList extends ListActivity{
 	    Intent i = new Intent(AssignmentList.this, SubTaskList.class);
 	    i.putExtra("assignment_id",assignment_id );
 	    startActivity(i);
-	  }
+	  }*/
 	
 
 	
