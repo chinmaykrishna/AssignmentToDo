@@ -5,23 +5,30 @@ import java.util.List;
 
 import sqliteHelper.DatabaseHelper;
 import sqliteModel.Course;
+import android.app.Activity;
 import android.app.Dialog;
-import android.app.ListActivity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends ListActivity {
+public class MainActivity extends Activity {
 
 	DatabaseHelper db;
-	
+	ListView l1;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +45,122 @@ public class MainActivity extends ListActivity {
 			list.add(course.getCourseName());
 		}
 
-		ArrayAdapter<String> adapter= new ArrayAdapter<String>(this, R.layout.course_row,R.id.course_name_row, list);
-		setListAdapter(adapter);
+		l1=(ListView)findViewById(R.id.c_list);
+		l1.setAdapter(new courseListAdapter(MainActivity.this,courses,list));
 
 	}
+	private static class courseViewHolder{
+		private TextView desc;
+		
+		public courseViewHolder()
+		{
+			
+		}
+		public courseViewHolder( TextView descview)
+		{
+		
+			this.desc=descview;
+		}
+		
+		public void setDesc(TextView desc)
+		{
+			this.desc=desc;
+		}
+		public TextView getDesc()
+		{
+			return this.desc;
+		}
+	}
+	class courseListAdapter extends BaseAdapter{
+
+		private Activity context;
+		//show course list
+		ArrayList<String> list_name=new ArrayList<String>();
+		
+		List<Course> courses=new ArrayList<Course>();
+		courseListAdapter() {
+			list_name=null;
+		    courses=null;
+		}
+		courseListAdapter(Activity context,List<Course> courses2,ArrayList<String> name)
+		{
+			this.context=context;
+			courses=courses2;
+			list_name=name;
+			
+		}
+		public View getView(int position, View convertView, ViewGroup parent) {
+			Course course=(Course) this.getItem(position);
+			View row;
+			if(convertView==null)
+			{
+			LayoutInflater inflater = (LayoutInflater)context.getSystemService
+					(Context.LAYOUT_INFLATER_SERVICE);
+			
+			row = inflater.inflate(R.layout.course_row, parent, false);
+			}
+			else
+				row=convertView;
+			TextView course_desc;
+			ImageView dlt;
+			dlt=(ImageView)row.findViewById(R.id.delete_course);
+			course_desc= (TextView) row.findViewById(R.id.course_name_row);
+			
+			row.setTag(new courseViewHolder(course_desc));
+			
+			course_desc.setText(list_name.get(position));
+			
+			
+			dlt.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+				ImageView delete =(ImageView) v;	
+				Course c=(Course) delete.getTag();
+				int cid=c.getCourseId();
+				Toast t1=Toast.makeText(MainActivity.this, cid +" should be deleted", Toast.LENGTH_LONG);
+				t1.show();
+				db.deleteCourse(cid);
+				}
+			});
+			course_desc.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+				TextView name=(TextView) v;
+				Course co=(Course) name.getTag();
+				
+				int coid=co.getCourseId();
+			    Intent i = new Intent(MainActivity.this, AssignmentList.class);
+			    i.putExtra("course_id",coid );
+			    startActivity(i);	
+				}
+			});
+			course_desc.setTag(course);
+			dlt.setTag(course);
+			
+			Log.e("POS", list_name.get(position));
+
+			return (row);
+		}
+		@Override
+		public int getCount() {
+			// TODO Auto-generated method stub
+			return list_name.size();
+		}
+		@Override
+		public Object getItem(int position) {
+			// TODO Auto-generated method stub
+			return courses.get(position);
+		}
+		@Override
+		public long getItemId(int position) {
+			// TODO Auto-generated method stub
+			return position;
+		}
+	}
+
+
 
 	//add course
 	public void addCourse(View v)
@@ -97,8 +216,9 @@ public class MainActivity extends ListActivity {
 		{
 			list.add(course.getCourseName());
 		}
-		ArrayAdapter<String> adapter= new ArrayAdapter<String>(this, R.layout.course_row,R.id.course_name_row, list);
-		setListAdapter(adapter);
+		l1=(ListView)findViewById(R.id.c_list);
+		l1.setAdapter(new courseListAdapter(MainActivity.this,courses,list));
+
 	}
 
 
@@ -110,23 +230,6 @@ public class MainActivity extends ListActivity {
 	}
 	
 	
-	@Override
-	  protected void onListItemClick(ListView l, View v, int position, long id) {
-		//list of courses
-		List<Course> courses=new ArrayList<Course>();
-		courses= db.getAllCourses();
-		//list of course names
-		ArrayList<Integer> list_id= new ArrayList<Integer>() ;
-		for(Course course:courses)
-		{
-			list_id.add(course.getCourseId());
-		}
-		int course_id=list_id.get(position);
-	    Toast.makeText(this, course_id + " id selected", Toast.LENGTH_LONG).show();
-	    Intent i = new Intent(MainActivity.this, AssignmentList.class);
-	    i.putExtra("course_id",course_id );
-	    startActivity(i);
-	  }
-
+	
 }
 
