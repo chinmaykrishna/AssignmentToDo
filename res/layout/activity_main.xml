@@ -19,7 +19,7 @@
         android:layout_marginBottom="60dp" >
     </ListView>
     
-    <ImageButton
+   <!-- <ImageButton
         android:id="@+id/course_remove_button"
         android:contentDescription="Removes course"
         android:layout_width="50dp"
@@ -28,7 +28,7 @@
         android:layout_centerHorizontal="true"
         android:background="@drawable/remove_button"
         android:onClick="removeCourse"
-        android:text="Remove Course" />
+        android:text="Remove Course" />-->
 
      <ImageButton
          android:id="@+id/course_add_button"
@@ -42,7 +42,7 @@
          android:onClick="addCourse"
          android:text="Add Course" />
 
-     <ImageButton
+     <!--<ImageButton
          android:id="@+id/refresh_course_button"
          android:contentDescription="Refreshes course list"
          android:layout_width="50dp"
@@ -51,6 +51,6 @@
          android:layout_alignParentRight="true"
          android:background="@drawable/refresh_button"
          android:onClick="refreshCourseList"
-         android:text="Refresh course list" />
+         android:text="Refresh course list" />-->
 
 </RelativeLayout>

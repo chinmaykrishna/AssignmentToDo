@@ -124,6 +124,7 @@ public class AssignmentList extends Activity{
 				Toast t1=Toast.makeText(AssignmentList.this, assnid +" should be deleted", Toast.LENGTH_LONG);
 				t1.show();
 				db.deleteAssignment(assnid);
+				refreshAssignmentList();
 				}
 			});
 			assignment_desc.setOnClickListener(new View.OnClickListener() {
@@ -194,6 +195,7 @@ public class AssignmentList extends Activity{
 					new_assignment.setAssignmentCourse(course_id);
 					new_assignment.setAssignmentStatus(0);
 					long ass = db.insertAssignment(new_assignment);
+					refreshAssignmentList();
 					Toast t=Toast.makeText(AssignmentList.this, ass +" inserted",Toast.LENGTH_SHORT);
 					t.show();
 					
@@ -210,7 +212,7 @@ public class AssignmentList extends Activity{
 		});
 		dialog.show();
 	}
-	public void refreshAssignmentList(View v)
+	public void refreshAssignmentList()
 	{
 		//list of Assignments
 		List<Assignment> assignments=new ArrayList<Assignment>();

@@ -32,6 +32,7 @@ public class SubTaskList extends FragmentActivity{
 	int assignment_id;
 	DatabaseHelper db;
 	ListView l1;
+	subtaskListAdapter sub_adapter;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -59,7 +60,9 @@ public class SubTaskList extends FragmentActivity{
 		}
 		
 		l1=(ListView)findViewById(R.id.task_list);
-		l1.setAdapter(new subtaskListAdapter(SubTaskList.this,subtasks,list_name, list_date, list_status));
+		sub_adapter=new subtaskListAdapter(SubTaskList.this,subtasks,list_name, list_date, list_status);
+		l1.setAdapter(sub_adapter);
+		sub_adapter.notifyDataSetChanged();
 	}
 	private static class SubtaskViewHolder{
 		private CheckBox cb;
@@ -170,6 +173,8 @@ public class SubTaskList extends FragmentActivity{
 				sub.setTaskAssignment(assignment_id);
 				int subid=sub.getTaskId();
 				db.deleteSubtask(subid);
+				refreshsubtaskList();
+				//sub_adapter.notifyDataSetChanged();
 				}
 			});
 			cb.setTag(subtask);
@@ -262,6 +267,9 @@ public class SubTaskList extends FragmentActivity{
 					new_subtask.setTaskDuedate(subtask_date);
 					new_subtask.setTaskAssignment(assignment_id);
 					long taskid=db.insertSubtask(new_subtask);
+					refreshsubtaskList();
+					//sub_adapter.notifyDataSetChanged();
+					
 					Toast toast= Toast.makeText(SubTaskList.this, "id is "+taskid, Toast.LENGTH_LONG);
 					toast.show();
 					
@@ -276,7 +284,7 @@ public class SubTaskList extends FragmentActivity{
 		});
 		dialog.show();
 	}
-	public void refreshsubtaskList(View v)
+	public void refreshsubtaskList()
 	{
 		List<Subtask> subtasks= new ArrayList<Subtask>();
 		subtasks = db.getAllSubtaskOfAssignment(assignment_id);

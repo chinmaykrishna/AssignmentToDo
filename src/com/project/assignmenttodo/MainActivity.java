@@ -121,6 +121,7 @@ public class MainActivity extends Activity {
 				Toast t1=Toast.makeText(MainActivity.this, cid +" should be deleted", Toast.LENGTH_LONG);
 				t1.show();
 				db.deleteCourse(cid);
+				refreshCourseList();
 				}
 			});
 			course_desc.setOnClickListener(new View.OnClickListener() {
@@ -191,6 +192,7 @@ public class MainActivity extends Activity {
 				{
 					new_course.setCourseName(course_name);
 					db.insertCourse(new_course);
+					refreshCourseList();
 					//ArrayAdapter<String> adapter=new ArrayAdapter<String>(MainActivity.this, R.layout.course_row,R.id.course_name_row, list);
 					//adapter.notifyDataSetChanged();
 				}
@@ -205,7 +207,7 @@ public class MainActivity extends Activity {
 		dialog.show();
 	}
 	//refresh course list
-	public void refreshCourseList(View v)
+	public void refreshCourseList()
 	{
 		//list of courses
 		List<Course> courses=new ArrayList<Course>();
