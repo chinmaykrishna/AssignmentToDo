@@ -193,7 +193,9 @@ public class AssignmentList extends Activity{
 					new_assignment.setAssignmentDesc(assignment_name);
 					new_assignment.setAssignmentCourse(course_id);
 					new_assignment.setAssignmentStatus(0);
-					db.insertAssignment(new_assignment);
+					long ass = db.insertAssignment(new_assignment);
+					Toast t=Toast.makeText(AssignmentList.this, ass +" inserted",Toast.LENGTH_SHORT);
+					t.show();
 					
 					//ArrayAdapter<String> adapter=new ArrayAdapter<String>(MainActivity.this, R.layout.assignment_row,R.id.assignment_name_row, list);
 					//adapter.notifyDataSetChanged();

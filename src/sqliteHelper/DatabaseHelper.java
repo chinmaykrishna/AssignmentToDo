@@ -48,7 +48,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	private static final String CREATE_TABLE_ASSIGNMENT= "CREATE TABLE " + TABLE_ASSIGNMENT +
 			"("+ KEY_ASSIGNMENT_ID+" INTEGER PRIMARY KEY,"+ KEY_ASSIGNMENT_DESC +" TEXT,"+
 			KEY_ASSIGNMENT_STATUS+" INTEGER,"+ KEY_ASSIGNMENT_COURSE+" INTEGER, FOREIGN KEY("+KEY_ASSIGNMENT_COURSE+")"
-			+" REFERENCES TABLE_COURSE("+KEY_COURSE_ID+")"+" ON DELETE CASCADE)";
+			+" REFERENCES TABLE_COURSE("+KEY_COURSE_ID+")"+")";
 	//course table creation query
 	private static final String CREATE_TABLE_COURSE= "CREATE TABLE " +TABLE_COURSES+
 			"(" + KEY_COURSE_ID +" INTEGER PRIMARY KEY,"+ KEY_COURSE_NAME+" TEXT"+")";
@@ -56,7 +56,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	private static final String CREATE_TABLE_SUBTASK= "CREATE TABLE " + TABLE_SUBTASK+
 			"("+KEY_TASK_ID+" INTEGER PRIMARY KEY,"+KEY_TASK_DESC +" TEXT,"+KEY_TASK_DUEDATE+" DATETIME,"
 			+KEY_TASK_STATUS+" INTEGER,"+KEY_TASK_ASSIGNMENT+" INTEGER, FOREIGN KEY("+KEY_TASK_ASSIGNMENT+")"
-			+" REFERENCES TABLE_ASSIGNMENT("+KEY_ASSIGNMENT_ID+")"+" ON DELETE CASCADE)";
+			+" REFERENCES TABLE_ASSIGNMENT("+KEY_ASSIGNMENT_ID+")"+")";
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
@@ -64,6 +64,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.execSQL(CREATE_TABLE_COURSE);
 		db.execSQL(CREATE_TABLE_SUBTASK);
 	}
+
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -74,7 +75,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		onCreate(db);
 	}
 	
-
 //CRUD
 //add course
 public long insertCourse(Course course)
@@ -109,11 +109,13 @@ public long insertSubtask(Subtask subtask)
 	long task_id= db.insert(TABLE_SUBTASK,null,values);
 	return task_id;
 }
+
+
 //get assignment of a course
-public List<Assignment> getAllAssignmentOfCourse(int course_id)
+public List<Assignment> getAllAssignmentOfCourse(long courseid)
 {
 	List<Assignment> assignments= new ArrayList<Assignment>();
-	String selectQuery= "SELECT * FROM "+ TABLE_ASSIGNMENT+" WHERE "+KEY_ASSIGNMENT_COURSE+"="+ course_id;
+	String selectQuery= "SELECT * FROM "+ TABLE_ASSIGNMENT+" WHERE "+KEY_ASSIGNMENT_COURSE+"="+ courseid;
 	Log.e(LOG,selectQuery);
 	SQLiteDatabase db= this.getReadableDatabase();
 	Cursor c=db.rawQuery(selectQuery, null);
@@ -134,10 +136,10 @@ public List<Assignment> getAllAssignmentOfCourse(int course_id)
 	return assignments;
 }
 //get subtasks of an assignment
-public List<Subtask> getAllSubtaskOfAssignment(int assignment_id)
+public List<Subtask> getAllSubtaskOfAssignment(long assignmentid)
 {
 	List<Subtask> subtasks= new ArrayList<Subtask>();
-	String selectQuery= "SELECT * FROM "+TABLE_SUBTASK+" WHERE "+KEY_TASK_ASSIGNMENT+"="+ assignment_id;
+	String selectQuery= "SELECT * FROM "+TABLE_SUBTASK+" WHERE "+KEY_TASK_ASSIGNMENT+"="+ assignmentid;
 	Log.e(LOG,selectQuery);
 	SQLiteDatabase db= this.getReadableDatabase();
 	Cursor c=db.rawQuery(selectQuery, null);
@@ -202,11 +204,21 @@ public void deleteSubtask(long subtaskid)
 public void deleteAssignment(long assignmentid)
 {
 	SQLiteDatabase db= this.getWritableDatabase();
+	List<Subtask> subtasks= getAllSubtaskOfAssignment(assignmentid);
+	for (Subtask subtask : subtasks)
+	{
+		deleteSubtask(subtask.getTaskId());
+	}
 	db.delete(TABLE_ASSIGNMENT, KEY_ASSIGNMENT_ID+" = ?", new String[]{String.valueOf(assignmentid)});
 }
 public void deleteCourse(long courseid)
 {
 	SQLiteDatabase db= this.getWritableDatabase();
+	List<Assignment> assignments= getAllAssignmentOfCourse(courseid);
+	for (Assignment assignment : assignments)
+	{
+		deleteAssignment(assignment.getAssignmentNo());
+	}
 	db.delete(TABLE_COURSES, KEY_COURSE_ID+" = ?", new String[]{String.valueOf(courseid)});
 }
 /*public int getCourseId(String course_name)
