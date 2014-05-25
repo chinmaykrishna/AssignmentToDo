@@ -33,12 +33,12 @@
      <ImageButton
          android:id="@+id/course_add_button"
          android:contentDescription="Adds course"
-         android:layout_width="53dp"
-         android:layout_height="53dp"
+       		android:layout_width="60dp"
+       		android:layout_height="60dp"
          android:layout_alignLeft="@android:id/list"
+         android:layout_centerHorizontal="true"
          android:layout_alignParentBottom="true"
          android:background="@drawable/add_button"
-         android:layout_alignParentLeft="true"
          android:onClick="addCourse"
          android:text="Add Course" />
 

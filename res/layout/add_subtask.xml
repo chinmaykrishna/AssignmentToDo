@@ -13,28 +13,18 @@
 
         <requestFocus />
     </EditText>
-
+    
     <Button
-        android:id="@+id/add_subtask"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="70dp"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/date"
-        android:layout_below="@+id/date"
-        android:layout_marginLeft="18dp"
-        android:text="Add" />
-
-    <Button
-        android:id="@+id/cancel_subtask"
+        android:id="@+id/set_date"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/date"
-        android:layout_below="@+id/date"
-        android:layout_marginRight="18dp"
-        android:text="Cancel" />
+       android:layout_centerHorizontal="true"
+        android:layout_below="@+id/subtask_text"
+        android:text="Enter Date" 
+        />
 
-    <EditText
+   <!-- <EditText
         android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -42,6 +32,27 @@
         android:layout_below="@+id/subtask_text"
         android:ems="10"
         android:hint="Enter Due Date"
-        android:inputType="date" />
+        android:inputType="date" />-->
+
+    <Button
+        android:id="@+id/add_subtask"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/set_date"
+        android:layout_marginLeft="20dp"
+        android:text="Add" />
+
+    <Button
+        android:id="@+id/cancel_subtask"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/add_subtask"
+        android:layout_alignBottom="@+id/add_subtask"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/set_date"
+        android:text="Cancel" />
 
 </RelativeLayout>
