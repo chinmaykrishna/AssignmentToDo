@@ -27,11 +27,12 @@ public final class R {
         public static final int ic_launcher=0x7f020003;
         public static final int refresh_button=0x7f020004;
         public static final int remove_button=0x7f020005;
-        public static final int texture=0x7f020006;
+        public static final int splash=0x7f020006;
+        public static final int texture=0x7f020007;
     }
     public static final class id {
         public static final int action_settings=0x7f080019;
-        public static final int add_subtask=0x7f08000a;
+        public static final int add_subtask=0x7f08000b;
         public static final int assign_list=0x7f08000d;
         public static final int assignment_add=0x7f080004;
         public static final int assignment_add_button=0x7f08000e;
@@ -46,11 +47,11 @@ public final class R {
         public static final int course_add_button=0x7f080001;
         public static final int course_name_row=0x7f080011;
         public static final int course_text=0x7f080006;
-        public static final int date=0x7f08000b;
         public static final int delete_assignment=0x7f080010;
         public static final int delete_course=0x7f080012;
         public static final int delete_task=0x7f080018;
         public static final int duedate=0x7f080017;
+        public static final int set_date=0x7f08000a;
         public static final int subtask_add_button=0x7f080014;
         public static final int subtask_desc=0x7f080016;
         public static final int subtask_text=0x7f080009;

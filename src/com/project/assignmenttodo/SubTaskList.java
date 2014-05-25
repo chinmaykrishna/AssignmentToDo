@@ -62,8 +62,9 @@ public class SubTaskList extends FragmentActivity{
 		l1=(ListView)findViewById(R.id.task_list);
 		sub_adapter=new subtaskListAdapter(SubTaskList.this,subtasks,list_name, list_date, list_status);
 		l1.setAdapter(sub_adapter);
-		sub_adapter.notifyDataSetChanged();
 	}
+	
+	//view holder
 	private static class SubtaskViewHolder{
 		private CheckBox cb;
 		private TextView date;
@@ -95,6 +96,8 @@ public class SubTaskList extends FragmentActivity{
 			return this.date;
 		}
 	}
+	
+	//base adapter class
 	class subtaskListAdapter extends BaseAdapter{
 
 		private Activity context;
@@ -180,15 +183,7 @@ public class SubTaskList extends FragmentActivity{
 			cb.setTag(subtask);
 			dlt.setTag(subtask);
 			
-			/*Boolean checkStatus;
-			if(subtask.getTaskStatus()==1)
-			{
-				checkStatus=true;
-			}
-			else
-				checkStatus=false;
-			cb.setChecked(checkStatus);
-			duedate.setText(subtask.getTaskDuedate());*/
+			
 			Log.e("POS", list_name.get(position));
 
 			return (row);
@@ -229,11 +224,12 @@ public class SubTaskList extends FragmentActivity{
 			// Do something with the date chosen by the user
 		}
 	}
-	public void showDatePickerDialog(View v) {
+	public void showDatePickerDialog() {
 	    DialogFragment newFragment = new DatePickerFragment();
 	    newFragment.show(getFragmentManager(), "datePicker");
 	}
 
+	//subtask add
 	public void addSubtask(View v)
 	{
 		final Dialog dialog=new Dialog(this);
@@ -241,6 +237,16 @@ public class SubTaskList extends FragmentActivity{
 		dialog.setTitle("Subtask addition");
 		Button subtask_add=(Button) dialog.findViewById(R.id.add_subtask);
 		Button cancel_subtask_add=(Button) dialog.findViewById(R.id.cancel_subtask);
+		Button change_date=(Button) dialog.findViewById(R.id.set_date);
+		
+		change_date.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				showDatePickerDialog();
+				
+			}
+		});
 
 		cancel_subtask_add.setOnClickListener(new OnClickListener() {
 
@@ -256,15 +262,15 @@ public class SubTaskList extends FragmentActivity{
 			@Override
 			public void onClick(View v) {
 				EditText subtask_text= (EditText)dialog.findViewById(R.id.subtask_text);
-				EditText date= (EditText)dialog.findViewById(R.id.date);
+				
 				Subtask new_subtask= new Subtask();
 				String subtask_name= subtask_text.getText().toString();
-				String subtask_date= date.getText().toString();
+				//String subtask_date= date.getText().toString();
 				if(subtask_name!=null)
 				{
 					new_subtask.setTaskDesc(subtask_name);
 					new_subtask.setTaskStatus(0);
-					new_subtask.setTaskDuedate(subtask_date);
+					//new_subtask.setTaskDuedate(subtask_date);
 					new_subtask.setTaskAssignment(assignment_id);
 					long taskid=db.insertSubtask(new_subtask);
 					refreshsubtaskList();
@@ -284,6 +290,8 @@ public class SubTaskList extends FragmentActivity{
 		});
 		dialog.show();
 	}
+	
+	//refresh after any change
 	public void refreshsubtaskList()
 	{
 		List<Subtask> subtasks= new ArrayList<Subtask>();
