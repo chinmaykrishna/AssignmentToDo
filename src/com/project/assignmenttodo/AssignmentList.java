@@ -248,6 +248,4 @@ public class AssignmentList extends Activity{
 	    startActivity(i);
 	  }*/
 	
-
-	
 }
