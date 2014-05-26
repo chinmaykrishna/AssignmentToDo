@@ -310,7 +310,7 @@ public class SubTaskList extends FragmentActivity implements DatePickerDialog.On
 	@Override
 	public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 		
-		new_date=String.valueOf(dayOfMonth)+"/"+String.valueOf(monthOfYear)+"/"+String.valueOf(year);
+		new_date=String.valueOf(dayOfMonth)+"-"+String.valueOf(monthOfYear+1)+"-"+String.valueOf(year);
 		Toast.makeText(SubTaskList.this, "date selected is "+new_date, Toast.LENGTH_LONG).show();
 		
 	}

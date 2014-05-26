@@ -31,7 +31,7 @@ public final class R {
         public static final int texture=0x7f020007;
     }
     public static final class id {
-        public static final int action_settings=0x7f08001b;
+        public static final int action_settings=0x7f08001c;
         public static final int add_subtask=0x7f08000d;
         public static final int assign_list=0x7f08000f;
         public static final int assignment_add=0x7f080006;
@@ -59,6 +59,7 @@ public final class R {
         public static final int task_list=0x7f080015;
         public static final int textView1=0x7f080004;
         public static final int title=0x7f080000;
+        public static final int today_task_list=0x7f08001b;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -70,6 +71,7 @@ public final class R {
         public static final int course_row=0x7f030006;
         public static final int subtask_list=0x7f030007;
         public static final int subtask_row=0x7f030008;
+        public static final int subtask_today=0x7f030009;
     }
     public static final class menu {
         public static final int main=0x7f070000;

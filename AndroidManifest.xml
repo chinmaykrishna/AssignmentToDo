@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="11"
+        android:minSdkVersion="16"
         android:targetSdkVersion="19" />
 
     <application
@@ -30,6 +30,13 @@
             android:name="com.project.assignmenttodo.SubTaskList">
             
         </activity>
+        <activity
+    android:name=".SubtaskToday"
+    android:parentActivityName=".MainActivity">
+    <meta-data
+        android:name="android.support.PARENT_ACTIVITY"
+        android:value=".MainActivity"/>
+</activity>
     </application>
 
 </manifest>
