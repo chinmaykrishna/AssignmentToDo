@@ -61,8 +61,7 @@ public class SubTaskList extends FragmentActivity implements DatePickerDialog.On
 		}
 		
 		l1=(ListView)findViewById(R.id.task_list);
-		sub_adapter=new subtaskListAdapter(SubTaskList.this,subtasks,list_name, list_date, list_status);
-		l1.setAdapter(sub_adapter);
+		l1.setAdapter(new subtaskListAdapter(SubTaskList.this,subtasks,list_name, list_date, list_status));
 	}
 	
 	//view holder

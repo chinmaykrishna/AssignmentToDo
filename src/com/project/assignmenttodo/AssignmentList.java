@@ -230,24 +230,6 @@ public class AssignmentList extends Activity{
 
 	}
 	
-	/*@Override
-	  protected void onListItemClick(ListView l, View v, int position, long id) {
-		List<Assignment> assignments=new ArrayList<Assignment>();
-		assignments= db.getAllAssignmentOfCourse(course_id);
-		//list of course names
-		final ArrayList<Integer> list_id= new ArrayList<Integer>() ;
-		
-		for(Assignment assignment:assignments)
-		{
-			list_id.add(assignment.getAssignmentNo());
-		}
-		int assignment_id=list_id.get(position);
-	    Toast.makeText(this, assignment_id + " id selected", Toast.LENGTH_LONG).show();
-	    Intent i = new Intent(AssignmentList.this, SubTaskList.class);
-	    i.putExtra("assignment_id",assignment_id );
-	    startActivity(i);
-	  }*/
 	
-
 	
 }
