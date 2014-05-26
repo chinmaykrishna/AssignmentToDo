@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -234,6 +235,18 @@ public class MainActivity extends Activity {
 		return true;
 	}
 	
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		switch (item.getItemId()) {
+		case R.id.instruction:
+			Intent i=new Intent(MainActivity.this, Instruction.class);
+			startActivity(i);
+		default:
+		return super.onOptionsItemSelected(item);
+		}
+	}
 	public void createNotification()
 	{
 		 // Prepare intent which is triggered if the

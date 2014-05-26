@@ -25,13 +25,13 @@ public final class R {
         public static final int gradient_bg=0x7f020001;
         public static final int ic_action_remove=0x7f020002;
         public static final int ic_launcher=0x7f020003;
-        public static final int refresh_button=0x7f020004;
-        public static final int remove_button=0x7f020005;
-        public static final int splash=0x7f020006;
-        public static final int texture=0x7f020007;
+        public static final int instruction=0x7f020004;
+        public static final int refresh_button=0x7f020005;
+        public static final int remove_button=0x7f020006;
+        public static final int splash=0x7f020007;
+        public static final int texture=0x7f020008;
     }
     public static final class id {
-        public static final int action_settings=0x7f08001c;
         public static final int add_subtask=0x7f08000d;
         public static final int assign_list=0x7f08000f;
         public static final int assignment_add=0x7f080006;
@@ -52,6 +52,7 @@ public final class R {
         public static final int delete_task=0x7f08001a;
         public static final int divider=0x7f080001;
         public static final int duedate=0x7f080019;
+        public static final int instruction=0x7f08001c;
         public static final int set_date=0x7f08000c;
         public static final int subtask_add_button=0x7f080016;
         public static final int subtask_desc=0x7f080018;
@@ -69,14 +70,16 @@ public final class R {
         public static final int assignment_list=0x7f030004;
         public static final int assignment_row=0x7f030005;
         public static final int course_row=0x7f030006;
-        public static final int subtask_list=0x7f030007;
-        public static final int subtask_row=0x7f030008;
-        public static final int subtask_today=0x7f030009;
+        public static final int instruction_page=0x7f030007;
+        public static final int subtask_list=0x7f030008;
+        public static final int subtask_row=0x7f030009;
+        public static final int subtask_today=0x7f03000a;
     }
     public static final class menu {
         public static final int main=0x7f070000;
     }
     public static final class string {
+        public static final int action_instruction=0x7f050003;
         public static final int action_settings=0x7f050001;
         public static final int app_name=0x7f050000;
         public static final int hello_world=0x7f050002;
