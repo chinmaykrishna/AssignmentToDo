@@ -28,11 +28,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class SubTaskList extends FragmentActivity{
+public class SubTaskList extends FragmentActivity implements DatePickerDialog.OnDateSetListener{
 	int assignment_id;
 	DatabaseHelper db;
 	ListView l1;
 	subtaskListAdapter sub_adapter;
+	String new_date;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -206,7 +207,7 @@ public class SubTaskList extends FragmentActivity{
 	}
 	//used for updating date
 	public static class DatePickerFragment extends DialogFragment
-	implements DatePickerDialog.OnDateSetListener {
+ {
 
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -217,12 +218,10 @@ public class SubTaskList extends FragmentActivity{
 			int day = c.get(Calendar.DAY_OF_MONTH);
 
 			// Create a new instance of DatePickerDialog and return it
-			return new DatePickerDialog(getActivity(), this, year, month, day);
+			return new DatePickerDialog(getActivity(), (SubTaskList)getActivity(), year, month, day);
 		}
 
-		public void onDateSet(DatePicker view, int year, int month, int day) {
-			// Do something with the date chosen by the user
-		}
+		
 	}
 	public void showDatePickerDialog() {
 	    DialogFragment newFragment = new DatePickerFragment();
@@ -270,14 +269,13 @@ public class SubTaskList extends FragmentActivity{
 				{
 					new_subtask.setTaskDesc(subtask_name);
 					new_subtask.setTaskStatus(0);
-					//new_subtask.setTaskDuedate(subtask_date);
+					new_subtask.setTaskDuedate(new_date);
 					new_subtask.setTaskAssignment(assignment_id);
 					long taskid=db.insertSubtask(new_subtask);
 					refreshsubtaskList();
 					//sub_adapter.notifyDataSetChanged();
 					
-					Toast toast= Toast.makeText(SubTaskList.this, "id is "+taskid, Toast.LENGTH_LONG);
-					toast.show();
+				
 					
 				}
 				else
@@ -308,6 +306,14 @@ public class SubTaskList extends FragmentActivity{
 		l1=(ListView)findViewById(R.id.task_list);
 		l1.setAdapter(new subtaskListAdapter(SubTaskList.this,subtasks,list_name, list_date, list_status));
 
+	}
+
+	@Override
+	public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+		
+		new_date=String.valueOf(dayOfMonth)+"/"+String.valueOf(monthOfYear)+"/"+String.valueOf(year);
+		Toast.makeText(SubTaskList.this, "date selected is "+new_date, Toast.LENGTH_LONG).show();
+		
 	}
 
 }
