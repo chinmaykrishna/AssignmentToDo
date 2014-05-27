@@ -42,25 +42,26 @@ public final class R {
         public static final int cancel_assignment_add=0x7f080007;
         public static final int cancel_course_add=0x7f080009;
         public static final int cancel_subtask=0x7f08000e;
-        public static final int checkBox1=0x7f080017;
+        public static final int checkBox1=0x7f080018;
         public static final int course_add=0x7f08000a;
         public static final int course_add_button=0x7f080003;
         public static final int course_name_row=0x7f080013;
         public static final int course_text=0x7f080008;
         public static final int delete_assignment=0x7f080012;
         public static final int delete_course=0x7f080014;
-        public static final int delete_task=0x7f08001a;
+        public static final int delete_task=0x7f08001b;
         public static final int divider=0x7f080001;
-        public static final int duedate=0x7f080019;
-        public static final int instruction=0x7f08001c;
+        public static final int duedate=0x7f08001a;
+        public static final int instruction=0x7f08001d;
         public static final int set_date=0x7f08000c;
-        public static final int subtask_add_button=0x7f080016;
-        public static final int subtask_desc=0x7f080018;
+        public static final int splash_image=0x7f080015;
+        public static final int subtask_add_button=0x7f080017;
+        public static final int subtask_desc=0x7f080019;
         public static final int subtask_text=0x7f08000b;
-        public static final int task_list=0x7f080015;
+        public static final int task_list=0x7f080016;
         public static final int textView1=0x7f080004;
         public static final int title=0x7f080000;
-        public static final int today_task_list=0x7f08001b;
+        public static final int today_task_list=0x7f08001c;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -71,9 +72,10 @@ public final class R {
         public static final int assignment_row=0x7f030005;
         public static final int course_row=0x7f030006;
         public static final int instruction_page=0x7f030007;
-        public static final int subtask_list=0x7f030008;
-        public static final int subtask_row=0x7f030009;
-        public static final int subtask_today=0x7f03000a;
+        public static final int splash=0x7f030008;
+        public static final int subtask_list=0x7f030009;
+        public static final int subtask_row=0x7f03000a;
+        public static final int subtask_today=0x7f03000b;
     }
     public static final class menu {
         public static final int main=0x7f070000;

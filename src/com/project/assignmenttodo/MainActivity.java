@@ -118,7 +118,7 @@ public class MainActivity extends Activity {
 				ImageView delete =(ImageView) v;	
 				Course c=(Course) delete.getTag();
 				int cid=c.getCourseId();
-				Toast t1=Toast.makeText(MainActivity.this, cid +" should be deleted", Toast.LENGTH_LONG);
+				Toast t1=Toast.makeText(MainActivity.this, "All the assignments and subtask of "+c.getCourseName()+" deleted", Toast.LENGTH_LONG);
 				t1.show();
 				db.deleteCourse(cid);
 				refreshCourseList();
@@ -193,8 +193,7 @@ public class MainActivity extends Activity {
 					new_course.setCourseName(course_name);
 					db.insertCourse(new_course);
 					refreshCourseList();
-					//ArrayAdapter<String> adapter=new ArrayAdapter<String>(MainActivity.this, R.layout.course_row,R.id.course_name_row, list);
-					//adapter.notifyDataSetChanged();
+					
 				}
 				else
 				{

@@ -162,8 +162,7 @@ public class SubTaskList extends FragmentActivity implements DatePickerDialog.On
 					else
 						subtask.setTaskStatus(1);
 					db.subtaskUpdate(subtask);
-					Toast toast=Toast.makeText(SubTaskList.this, "ass "+subtask.getTaskAssignment(), Toast.LENGTH_LONG);
-					toast.show();
+					
 					
 				}
 			});

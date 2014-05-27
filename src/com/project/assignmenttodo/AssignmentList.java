@@ -121,7 +121,7 @@ public class AssignmentList extends Activity{
 				Assignment assn=(Assignment) delete.getTag();
 				assn.setAssignmentCourse(course_id);
 				int assnid=assn.getAssignmentNo();
-				Toast t1=Toast.makeText(AssignmentList.this, assnid +" should be deleted", Toast.LENGTH_LONG);
+				Toast t1=Toast.makeText(AssignmentList.this,"All the subtasks of "+assn.getAssignmentDesc()+" should be deleted", Toast.LENGTH_LONG);
 				t1.show();
 				db.deleteAssignment(assnid);
 				refreshAssignmentList();
@@ -196,11 +196,9 @@ public class AssignmentList extends Activity{
 					new_assignment.setAssignmentStatus(0);
 					long ass = db.insertAssignment(new_assignment);
 					refreshAssignmentList();
-					Toast t=Toast.makeText(AssignmentList.this, ass +" inserted",Toast.LENGTH_SHORT);
-					t.show();
 					
-					//ArrayAdapter<String> adapter=new ArrayAdapter<String>(MainActivity.this, R.layout.assignment_row,R.id.assignment_name_row, list);
-					//adapter.notifyDataSetChanged();
+					
+					
 				}
 				else
 				{
