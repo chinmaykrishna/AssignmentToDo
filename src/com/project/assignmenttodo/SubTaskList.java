@@ -272,10 +272,16 @@ public class SubTaskList extends FragmentActivity implements DatePickerDialog.On
 					new_subtask.setTaskAssignment(assignment_id);
 					long taskid=db.insertSubtask(new_subtask);
 					refreshsubtaskList();
-					//sub_adapter.notifyDataSetChanged();
+					List<Subtask> subs=new ArrayList<Subtask>();
 					
-				
-					
+					subs=db.getTodaySubtask();
+					if(!subs.isEmpty())
+					{
+					int no_of_subtasks=subs.size();
+					Notifiers n=new Notifiers();
+					n.createNotification(getApplication(), no_of_subtasks);
+			
+					}
 				}
 				else
 				{
