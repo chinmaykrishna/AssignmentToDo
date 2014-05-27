@@ -263,7 +263,7 @@ public class SubTaskList extends FragmentActivity implements DatePickerDialog.On
 				Subtask new_subtask= new Subtask();
 				String subtask_name= subtask_text.getText().toString();
 				//String subtask_date= date.getText().toString();
-				if(subtask_name!=null)
+				if(!subtask_name.isEmpty())
 				{
 					new_subtask.setTaskDesc(subtask_name);
 					new_subtask.setTaskStatus(0);

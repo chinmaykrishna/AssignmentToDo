@@ -189,7 +189,7 @@ public class AssignmentList extends Activity{
 				EditText assignment_text= (EditText)dialog.findViewById(R.id.assignment_text);
 				Assignment new_assignment= new Assignment();
 				String assignment_name= assignment_text.getText().toString();
-				if(assignment_name!=null)
+				if(!assignment_name.isEmpty())
 				{
 					new_assignment.setAssignmentDesc(assignment_name);
 					new_assignment.setAssignmentCourse(course_id);

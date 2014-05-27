@@ -188,7 +188,7 @@ public class MainActivity extends Activity {
 				EditText course_text= (EditText)dialog.findViewById(R.id.course_text);
 				Course new_course= new Course();
 				String course_name= course_text.getText().toString();
-				if(course_name!=null)
+				if(!course_name.isEmpty())
 				{
 					new_course.setCourseName(course_name);
 					db.insertCourse(new_course);
