@@ -51,8 +51,8 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/add_subtask"
         android:layout_alignBottom="@+id/add_subtask"
-        android:layout_marginLeft="20dp"
-        android:layout_toRightOf="@+id/set_date"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
         android:text="Cancel" />
 
 </RelativeLayout>

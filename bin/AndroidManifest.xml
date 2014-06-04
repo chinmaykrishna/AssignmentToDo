@@ -9,12 +9,13 @@
         android:targetSdkVersion="19" />
 
     <application
+        android:name="TaskelApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.project.assignmenttodo.MainActivity"
+            android:name="com.project.assignmenttodo.SplashScreen"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,20 +24,26 @@
             </intent-filter>
         </activity>
         <activity 
-            android:name="com.project.assignmenttodo.AssignmentList">
-            
+            android:name=".MainActivity">
         </activity>
-        <activity 
-            android:name="com.project.assignmenttodo.SubTaskList">
-            
+        <activity android:name="com.project.assignmenttodo.AssignmentList" >
+        </activity>
+        <activity android:name="com.project.assignmenttodo.SubTaskList" >
         </activity>
         <activity
-    android:name=".SubtaskToday"
-    android:parentActivityName=".MainActivity">
-    <meta-data
-        android:name="android.support.PARENT_ACTIVITY"
-        android:value=".MainActivity"/>
-</activity>
+            android:name=".SubtaskToday"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity
+            android:name=".Instruction" >
+            
+        </activity>
+        <service 
+            android:name=".Notifiers"
+            android:exported="false"></service>
     </application>
 
 </manifest>

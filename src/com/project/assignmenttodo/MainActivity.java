@@ -7,15 +7,13 @@ import sqliteHelper.DatabaseHelper;
 import sqliteModel.Course;
 import android.app.Activity;
 import android.app.Dialog;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -37,7 +35,6 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		db = new DatabaseHelper(getApplicationContext());
-		createNotification();
 		//list of courses
 		List<Course> courses=new ArrayList<Course>();
 		courses= db.getAllCourses();
@@ -121,7 +118,7 @@ public class MainActivity extends Activity {
 				ImageView delete =(ImageView) v;	
 				Course c=(Course) delete.getTag();
 				int cid=c.getCourseId();
-				Toast t1=Toast.makeText(MainActivity.this, cid +" should be deleted", Toast.LENGTH_LONG);
+				Toast t1=Toast.makeText(MainActivity.this, "All the assignments and subtask of "+c.getCourseName()+" deleted", Toast.LENGTH_LONG);
 				t1.show();
 				db.deleteCourse(cid);
 				refreshCourseList();
@@ -191,13 +188,12 @@ public class MainActivity extends Activity {
 				EditText course_text= (EditText)dialog.findViewById(R.id.course_text);
 				Course new_course= new Course();
 				String course_name= course_text.getText().toString();
-				if(course_name!=null)
+				if(!course_name.isEmpty())
 				{
 					new_course.setCourseName(course_name);
 					db.insertCourse(new_course);
 					refreshCourseList();
-					//ArrayAdapter<String> adapter=new ArrayAdapter<String>(MainActivity.this, R.layout.course_row,R.id.course_name_row, list);
-					//adapter.notifyDataSetChanged();
+					
 				}
 				else
 				{
@@ -234,24 +230,19 @@ public class MainActivity extends Activity {
 		return true;
 	}
 	
-	public void createNotification()
-	{
-		 // Prepare intent which is triggered if the
-	    // notification is selected
-	    Intent intent = new Intent(this, SubtaskToday.class);
-	    PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
-	 // Build notification
-	    // Actions are just fake
-	    Notification noti = new Notification.Builder(this)
-	        .setContentTitle("Taskel - Today's Subtasks")
-	        .setContentText("N number of subtask to be done today")
-	        .setContentIntent(pIntent)
-	        .setSmallIcon(R.drawable.ic_launcher)
-	        .build();
-	    NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-	    notificationManager.notify(0, noti);
-
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		switch (item.getItemId()) {
+		case R.id.instruction:
+			Intent i=new Intent(MainActivity.this, Instruction.class);
+			startActivity(i);
+		default:
+		return super.onOptionsItemSelected(item);
+		}
 	}
+	
 	
 	
 }

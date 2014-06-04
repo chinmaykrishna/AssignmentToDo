@@ -162,8 +162,7 @@ public class SubTaskList extends FragmentActivity implements DatePickerDialog.On
 					else
 						subtask.setTaskStatus(1);
 					db.subtaskUpdate(subtask);
-					Toast toast=Toast.makeText(SubTaskList.this, "ass "+subtask.getTaskAssignment(), Toast.LENGTH_LONG);
-					toast.show();
+					
 					
 				}
 			});
@@ -264,7 +263,7 @@ public class SubTaskList extends FragmentActivity implements DatePickerDialog.On
 				Subtask new_subtask= new Subtask();
 				String subtask_name= subtask_text.getText().toString();
 				//String subtask_date= date.getText().toString();
-				if(subtask_name!=null)
+				if(!subtask_name.isEmpty())
 				{
 					new_subtask.setTaskDesc(subtask_name);
 					new_subtask.setTaskStatus(0);
@@ -272,10 +271,16 @@ public class SubTaskList extends FragmentActivity implements DatePickerDialog.On
 					new_subtask.setTaskAssignment(assignment_id);
 					long taskid=db.insertSubtask(new_subtask);
 					refreshsubtaskList();
-					//sub_adapter.notifyDataSetChanged();
+					List<Subtask> subs=new ArrayList<Subtask>();
 					
-				
-					
+					subs=db.getTodaySubtask();
+					if(!subs.isEmpty())
+					{
+					int no_of_subtasks=subs.size();
+					Notifiers n=new Notifiers();
+					n.createNotification(getApplication(), no_of_subtasks);
+			
+					}
 				}
 				else
 				{

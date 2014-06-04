@@ -1,6 +1,7 @@
 package sqliteHelper;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import sqliteModel.Assignment;
@@ -10,9 +11,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 	
@@ -221,11 +222,35 @@ public void deleteCourse(long courseid)
 	}
 	db.delete(TABLE_COURSES, KEY_COURSE_ID+" = ?", new String[]{String.valueOf(courseid)});
 }
-/*public int getCourseId(String course_name)
+public List<Subtask> getTodaySubtask()
 {
+	final Calendar c = Calendar.getInstance();
+	int year = c.get(Calendar.YEAR);
+	int month = c.get(Calendar.MONTH);
+	int day = c.get(Calendar.DAY_OF_MONTH);
+
+	String today=String.valueOf(day)+"-"+String.valueOf(month+1)+"-"+String.valueOf(year);
+	String selectQuery="SELECT * FROM "+TABLE_SUBTASK+" WHERE "+KEY_TASK_DUEDATE+"='"+today+"'";
+	Log.e("LOG", selectQuery);
+	List<Subtask> subtasks= new ArrayList<Subtask>();
 	SQLiteDatabase db=this.getReadableDatabase();
-	String selectQuery= "SELECT "+KEY_COURSE_ID+" FROM TABLE_COURSES WHERE KEY_COURSE_NAME="+course_name;
-	
-}*/
+	Cursor ct=db.rawQuery(selectQuery, null);
+	if(ct.moveToFirst())
+	{
+		do
+		{
+			Subtask t= new Subtask();
+			t.setTaskId(ct.getInt(ct.getColumnIndex(KEY_TASK_ID)));
+			t.setTaskDesc(ct.getString(ct.getColumnIndex(KEY_TASK_DESC)));
+			t.setTaskDuedate(ct.getString(ct.getColumnIndex(KEY_TASK_DUEDATE)));
+			t.setTaskStatus(ct.getInt(ct.getColumnIndex(KEY_TASK_STATUS)));
+			t.setTaskAssignment(ct.getInt(ct.getColumnIndex(KEY_TASK_ASSIGNMENT)));
+			//if task's Assignment to be shown
+			subtasks.add(t);
+		}
+		while (ct.moveToNext());
+	}
+	return subtasks;
+}
 
 }
